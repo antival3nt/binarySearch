@@ -2,12 +2,13 @@
 
 import random
 import time
+import sys
 
 # naive search: scan entire list and ask if it's equal to the target
 # if yes, return the index
 # if no, return -1
-from random import Random, random
 
+sys.setrecursionlimit(2500)
 
 def naive_search(l, target):
     # Example l = [1, 3, 10, 12]
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     # Build sorted list of 10k
     sorted_list = set()
     while len(sorted_list) < length:
-        sorted_list.add(Random.randint(-3 * length, 3 * length))
+        sorted_list.add(random.randint(-3 * length, 3 * length))
     sorted_list = list(sorted_list)
 
     # Run naive search on sorted list 10.000 times
@@ -55,11 +56,11 @@ if __name__ == "__main__":
     for target in sorted_list:
         naive_search(sorted_list, target)
     end = time.time()
-    print("Naive search: ", end - start/length, "seconds")
+    print("Naive search: ", (end - start)/length, "seconds")
 
     # Run binary search on sorted list 10.000 times
-    start = time.time()
+    startb = time.time()
     for target in sorted_list:
         binary_search(sorted_list, target)
-    end = time.time()
-    print("Binary search: ", end - start/length, "seconds")
+    endb = time.time()
+    print("Binary search: ", (endb - startb)/length, "seconds")
